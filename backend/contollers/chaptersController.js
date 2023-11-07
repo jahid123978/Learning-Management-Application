@@ -47,7 +47,7 @@ const getchapter = async (req, res) => {
 //create new chapters
 const createChapters = async (req, res) => {
   const title = req.body.title;
-  console.log("title: ", title)
+  console.log("title: ", req.body)
   // console.log(req.user);
   try {
     const user_id = req.user._id;

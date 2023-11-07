@@ -26,12 +26,11 @@ export default function Collapsible({ unit }) {
               href={unit.link}
               className="hover:text-red-500 font-black  text-md"
             >
-              View 
+              Donwload or join the meeting link 
             </a>
             <br />
             <p className="text-sm">
-           This is the description. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+            Click on the view Download the Lecture or join the meeting link
             </p>
           </Typography>
         </AccordionDetails>

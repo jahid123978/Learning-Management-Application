@@ -6,6 +6,7 @@ const storage = multer.diskStorage({
    return cb(null, "./public/files");
   },
   filename: (req, file, cb) => {
+    console.log("file name: ", file)
    return cb(
       null,
       new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
@@ -13,6 +14,7 @@ const storage = multer.diskStorage({
   },
 });
 const filefilter = (req, file, cb) => {
+  console.log("file name2: ", file)
   if (
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||

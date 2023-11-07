@@ -105,7 +105,7 @@ const CourseTiles = (props) => {
         <div className="flex h-8 ">
           <button className="text-xs mx-auto  my-auto text-red-400 font-black  ">
             {" "}
-            View class
+            Details
           </button>
         </div>
       </Link>
