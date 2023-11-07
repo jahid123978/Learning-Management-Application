@@ -26,6 +26,7 @@ router.get("/st", getChapters_st);
 router.get("/:id", getchapter);
 
 //POST A NEW chapters || using req u can access data
+// upload.single("img")
 router.post("/", upload.single("img"), createChapters);
 
 //Delete a  chapter

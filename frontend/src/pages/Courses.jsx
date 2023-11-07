@@ -29,7 +29,7 @@ const Courses = () => {
         },
       });
       const json = await response.json();
-
+      
       if (response.ok) {
         dispatch({ type: "SET_CHAPTERS", payload: json });
         setLoading(false);
@@ -49,9 +49,15 @@ const Courses = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("img", file);
+    // const formData = new FormData();
+    const formData = {
+      title: title,
+      img: file
+    }
+    // formData.append("title", title);
+    // formData.append("img", file);
+    // console.log("image: ", file)
+    console.log("formData: ", formData)
 
     const response = await fetch("http://localhost:4000/api/chapters/", {
       method: "POST",

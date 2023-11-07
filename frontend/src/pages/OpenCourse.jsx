@@ -12,12 +12,12 @@ import BreadCrumbs from "../componets/BreadCrumb";
 import { ProgressBar } from "react-loader-spinner";
 import Swal from "sweetalert2";
 import Layout from "../componets/Layout/Layout";
-
 const OpenCourse = () => {
   const location = useLocation();
   const propsData = location.state;
   // const {module,dispatch}=useModuleContext()
   const { file, fileLink } = propsData;
+  console.log("file: ", file, " fileLink: ", fileLink)
   const navigate=useNavigate()
   const moduleAdd = {
     _id: propsData._id,
@@ -35,7 +35,7 @@ const OpenCourse = () => {
   const [buttonPopup, setButtonPopup] = useState(false);
   const [buttonPopup2, setButtonPopup2] = useState(false);
   const { user } = useAuthContext();
-  // const {dispatch}=useModuleContext()
+  const {dispatch}=useModuleContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,18 +47,20 @@ const OpenCourse = () => {
     }
 
     const formData = new FormData();
-    formData.append("title", units);
+    formData.append('title', units);
     formData.append("doc", files);
     formData.append("_id", _id);
-
     const response = await fetch("http://localhost:4000/api/module/", {
       method: "POST",
       body: formData,
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        Authorization : `Bearer ${user.token}`
       },
     });
     const json = await response.json();
+    // console.log("response json: ", response.json())
+    console.log("response: ", response)
+    console.log("json: ", json)
 
     if (!response.ok) {
       setError(json.error);

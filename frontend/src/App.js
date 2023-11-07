@@ -19,52 +19,96 @@ function App() {
   return (
     <div className="  ">
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={user ? <Dashboard /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/"
+          element= {<Dashboard />}
+        />
+        {/* <Route
           path="/Dashboard"
           element={user ? <Dashboard /> : <Navigate to="/login" />}
+        /> */}
+        <Route
+          path="/Dashboard"
+          element={<Dashboard />}
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route
+        {/* <Route
           path="/profile"
           element={user ? <Profile /> : <Navigate to="/login" />}
+        /> */}
+        <Route
+          path="/profile"
+          element={ <Profile />}
         />
 
-        <Route
+        {/* <Route
           path="/Courses"
           element={user ? <Courses /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/Courses"
+          element={ <Courses />}
+        />
+        {/* <Route
           path="/Chat"
           element={user ? <Chat /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/Chat"
+          element={<Chat />}
+        />
+        {/* <Route
           path="/Meet"
           element={user ? <Meet /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/Meet"
+          element={<Meet />}
+        />
+        {/* <Route
           path="/OpenCourse"
           element={user ? <OpenCourse /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/OpenCourse"
+          element={<OpenCourse />}
+        />
+        {/* <Route
           path="/Todo"
           element={user ? <Todo /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/Todo"
+          element={ <Todo />}
+        />
+        {/* <Route
           path="/AddNewModule"
           element={user ? <AddNewModule /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/AddNewModule"
+          element={ <AddNewModule />}
+        />
+        {/* <Route
           path="/Grades"
           element={user ? <Grades /> : <Navigate to="/login" />}
-        />
+        /> */}
         <Route
+          path="/Grades"
+          element={<Grades />}
+        />
+        {/* <Route
           path="/Student-List"
           element={user ? <StudentsList /> : <Navigate to="/login" />}
+        /> */}
+        <Route
+          path="/Student-List"
+          element={<StudentsList />}
         />
       </Routes>
     </div>

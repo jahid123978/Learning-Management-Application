@@ -11,7 +11,7 @@ export const moduleReducer = (state, action) => {
       };
     case "CREATE_MODULE":
       return {
-        module: [action.payload, ...state.module],
+        module: [action?.payload, ...state?.module],
       };
     default:
       return state;

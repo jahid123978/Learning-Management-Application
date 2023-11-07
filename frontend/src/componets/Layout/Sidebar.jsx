@@ -48,7 +48,7 @@ const Sidebar = ({ check, setCheck, forwardRef }) => {
             <img src={Person} className="m-auto" alt=" not found" />
            
           </Link>
-          <span className="my-auto ml-4 text-sm md:text-md">{user.name}</span>
+          <span className="my-auto ml-4 text-sm md:text-md">{user?.name}</span>
 
           {/* <div className="flex items-center flex-col">
             <h1>LMS</h1>

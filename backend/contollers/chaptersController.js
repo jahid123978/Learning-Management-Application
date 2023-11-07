@@ -47,7 +47,8 @@ const getchapter = async (req, res) => {
 //create new chapters
 const createChapters = async (req, res) => {
   const title = req.body.title;
-  console.log(req.user);
+  console.log("title: ", title)
+  // console.log(req.user);
   try {
     const user_id = req.user._id;
     if (req.file !== undefined) {
@@ -62,7 +63,7 @@ const createChapters = async (req, res) => {
       res.status(200).json(chapter);
     }
   } catch (err) {
-    console.log(err);
+    console.log("error: ", err);
   }
 };
 

@@ -60,6 +60,7 @@ function Chat() {
         <h1 className="md:pr-[10vw] text-black md:text-white  mx-auto text-4xl font-black p-4 ">
           Chat
         </h1>
+        <div className="mb-6">
         {prevMessage.map((payload, index) => {
           return (
             <p
@@ -91,12 +92,14 @@ function Chat() {
             </p>
           );
         })}
+        </div>
+       
         <form
           onSubmit={sendChat}
-          className="pb-2 md:w-[80%]  w-full md:justify-center fixed bottom-0 flex "
+          className="pd-1 md:w-[80%]  w-full md:justify-center fixed bottom-0 flex "
         >
           <input
-            className="w-[80%] rounded-lg ml-2 drop-shadow-lg "
+            className="w-[80%] rounded-lg drop-shadow-lg "
             type="text"
             name="chat"
             placeholder="sendtext"
@@ -141,7 +144,7 @@ function Chat() {
                 ></path>
               </svg>
             </span>
-            <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
+            <span class="relative w-full mr-8 text-left transition-colors duration-200 ease-in-out group-hover:text-white">
               Sent
             </span>
           </button>

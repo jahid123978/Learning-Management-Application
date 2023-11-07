@@ -1,12 +1,12 @@
-"use strict";
+// "use strict";
 const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads");
+   return cb(null, "./public/files");
   },
   filename: (req, file, cb) => {
-    cb(
+   return cb(
       null,
       new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
     );
