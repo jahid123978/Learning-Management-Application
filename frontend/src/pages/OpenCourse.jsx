@@ -12,11 +12,12 @@ import BreadCrumbs from "../componets/BreadCrumb";
 import { ProgressBar } from "react-loader-spinner";
 import Swal from "sweetalert2";
 import Layout from "../componets/Layout/Layout";
+import { Grid } from "@mui/material";
 const OpenCourse = () => {
   const location = useLocation();
   const propsData = location.state;
   // const {module,dispatch}=useModuleContext()
-  const { file, fileLink } = propsData;
+  const { file, fileLink} = propsData;
   console.log("file: ", file, " fileLink: ", fileLink)
   const navigate=useNavigate()
   const moduleAdd = {
@@ -59,9 +60,8 @@ const OpenCourse = () => {
     });
     const json = await response.json();
     // console.log("response json: ", response.json())
-    console.log("response: ", response)
-    console.log("json: ", json)
-
+    // console.log("response: ", response)
+    // console.log("json: ", json)
     if (!response.ok) {
       setError(json.error);
       Swal.fire({
@@ -136,7 +136,7 @@ const OpenCourse = () => {
   };
 
   return (
-    <Layout>
+      <>
       <BreadCrumbs />
 
       <div className=" flex flex-col ">
@@ -145,7 +145,7 @@ const OpenCourse = () => {
             Course overview
           </h1>
           <div className="inline-flex text-white  my-4" role="group">
-            {user.role === "Admin" ? (
+            {user?.role === "Admin" ? (
               <button
                 type="button"
                 onClick={() => setButtonPopup(true)}
@@ -155,7 +155,7 @@ const OpenCourse = () => {
               </button>
             ) : null}
 
-            {user.role === "Admin" ? (
+            {user?.role === "Admin" ? (
               <button
                 type="button"
                 onClick={() => setButtonPopup2(true)}
@@ -164,33 +164,24 @@ const OpenCourse = () => {
                 <AddLinkIcon className="mr-2" /> Upload a link
               </button>
             ) : null}
-            {user.role === "Admin" ? (
-              <button
-                type="button"
-                className="inline-flex w-max items-center px-2 md:px-28 py-3 md:mx-4  rounded-xl drop-shadow-md text-xs md:text-sm   font-medium  transition ease-in-out delay-150 bg-purple-600 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 "
-              >
-                <svg
-                  aria-hidden="true"
-                  className="w-4 h-4 mr-2 fill-current"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                Downloads
-              </button>
-            ) : null}
           </div>
         </div>
-        <div className="md:mx-10 mx-2">
+        <Grid container  columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid item xs={12} sm={12} md={6}>
+                <img style={{width: '600px', height: '400px', marginTop: '20px'}} src={propsData?.img} alt="" />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} sx={{marginTop: '20px', textAlign:'left'}}>
+           <h1>Course Name: {propsData?.title}</h1>
+            <h2>Course Duration: {propsData?.duration}</h2>
+            <h2>Course Price: {propsData?.price}</h2>
+            <p><span className='font-size'>Description</span>: {propsData?.description}</p>
+            <div className="md:mx-10 mx-2 mt-10">
           {file && file.map((files) => <Collapsible unit={files} />)}
           {fileLink && fileLink.map((files) => <Collapsible unit={files} />)}
         </div>
+            </Grid>
+            </Grid>
+       
         <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
           <div className=" flex items-center justify-center ">
             {loading ? (
@@ -312,7 +303,7 @@ const OpenCourse = () => {
           </div>
         </Popup>
       </div>
-    </Layout>
+      </>
   );
 };
 

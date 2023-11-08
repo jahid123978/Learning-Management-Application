@@ -46,9 +46,9 @@ const getchapter = async (req, res) => {
 
 //create new chapters
 const createChapters = async (req, res) => {
-  const title = req.body.title;
+  const {title, price, duration, description, teacher} = req.body;
   console.log("title: ", req.body)
-  // console.log(req.user);
+  console.log(req.file);
   try {
     const user_id = req.user._id;
     if (req.file !== undefined) {
@@ -56,10 +56,10 @@ const createChapters = async (req, res) => {
         public_id: `${title}_Course`,
       });
       const img = result.url;
-      const chapters_img = await Chapters.create({ title, img, user_id });
+      const chapters_img = await Chapters.create({ title, price, duration, description, teacher, img, user_id });
       res.status(200).json(chapters_img);
     } else {
-      const chapter = await Chapters.create({ title, user_id });
+      const chapter = await Chapters.create({ title, price, duration, description, teacher, user_id });
       res.status(200).json(chapter);
     }
   } catch (err) {

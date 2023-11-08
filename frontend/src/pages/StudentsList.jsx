@@ -136,7 +136,6 @@ const TableColumns = () => {
     getAllUsers();
   }, []);
   return (
-    <Layout>
       <Card sx={{ margin: "1rem" }} className="w-[95%] lg:w-[90%]">
         <CardHeader title="All Users" />
         <DataGrid
@@ -163,7 +162,7 @@ const TableColumns = () => {
           }}
         />
       </Card>
-    </Layout>
+    
   );
 };
 

@@ -2,15 +2,13 @@ import {Link} from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import googleMeet from '../img/icons/googleMeet.svg'
 import Zoom from '../img/icons/Zoom.svg'
+import { Grid } from "@mui/material";
 
 const DashCourseTile=()=>{
     return(
-        <div className=" mx-20 flex flex-col w-full mt-0 relative">
-            <svg className="animate-bounce w-6 h-6 ">
-                sd
-            </svg>
-         
-            <div className="flex shadow-2xl justify-around my-20 w-3/4 h-80 rounded-xl bg-white  border  ">
+        <Grid container spacing={2}>
+  <Grid item xs={8}>
+  <div className="shadow-2xl my-20 h-80 rounded-xl bg-white  border  ">
                 <div className="flex ">
                     <img   src={googleMeet} alt=""></img>
                 </div>
@@ -22,7 +20,10 @@ const DashCourseTile=()=>{
                     
                 </div>            
             </div>
-              <div className="flex shadow-2xl justify-around w-3/4 h-80 rounded-xl bg-white my-10  relative right-0  md:-right-60 border  " >
+  </Grid>
+  <Grid item xs={4}>
+  </Grid>
+  <div className="flex shadow-2xl justify-around w-3/4 h-80 rounded-xl bg-white my-10  relative right-0  md:-right-60 border  " >
                 <div className="flex ">
                     <img   src={Zoom} alt=""></img>
                 </div>
@@ -35,7 +36,8 @@ const DashCourseTile=()=>{
                 </div> 
 
             </div>
-        </div>
+</Grid>
+      
     )
 }
 

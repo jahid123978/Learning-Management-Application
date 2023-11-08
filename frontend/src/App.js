@@ -12,12 +12,15 @@ import OpenCourse from "./pages/OpenCourse";
 import StudentsList from "./pages/StudentsList";
 import Login from "./pages/Auth/login";
 import Signup from "./pages/Auth/signup";
+import Header from "./pages/Pages/Header/Header";
+import Footer from "./pages/Pages/Footer/Footer"
 
 function App() {
   const { user } = useAuthContext();
 
   return (
     <div className="  ">
+      <Header></Header>
       <Routes>
         {/* <Route
           path="/"
@@ -111,6 +114,7 @@ function App() {
           element={<StudentsList />}
         />
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

@@ -10,9 +10,14 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Swal from "sweetalert2";
 import { ProgressBar } from "react-loader-spinner";
 import Layout from "../componets/Layout/Layout";
+import { Grid } from "@mui/material";
 
 const Courses = () => {
   const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  const [duration, setDuration] = useState("");
+  const [teacher, setTeacher] = useState("");
+  const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,23 +25,63 @@ const Courses = () => {
   const { user } = useAuthContext();
   const [buttonPopup, setButtonPopup] = useState(false);
 
+  // useEffect(() => {
+  //   setLoading(true);
+  //   const fetchChapters = async () => {
+  //     const response = await fetch("http://localhost:4000/api/chapters/", {
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     });
+  //     const json = await response.json();
+      
+  //     if (response.ok) {
+  //       console.log("response: ", json);
+  //       dispatch({ type: "SET_CHAPTERS", payload: json });
+  //       setLoading(false);
+  //     }
+  //   };
+  //   if (user) {
+  //     fetchChapters();
+  //   }
+  // }, [dispatch, user]);
   useEffect(() => {
     setLoading(true);
-    const fetchChapters = async () => {
-      const response = await fetch("http://localhost:4000/api/chapters/", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-      const json = await response.json();
-      
-      if (response.ok) {
-        dispatch({ type: "SET_CHAPTERS", payload: json });
-        setLoading(false);
+
+    if (user.role === "Admin") {
+      const fetchChapters = async () => {
+        const response = await fetch("http://localhost:4000/api/chapters/", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const json = await response.json();
+
+        if (response.ok) {
+          dispatch({ type: "SET_CHAPTERS", payload: json });
+          setLoading(false);
+        }
+      };
+      if (user) {
+        fetchChapters();
       }
-    };
-    if (user) {
-      fetchChapters();
+    } else {
+      const fetchChapters = async () => {
+        const response = await fetch("http://localhost:4000/api/chapters/st", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const json = await response.json();
+
+        if (response.ok) {
+          dispatch({ type: "SET_CHAPTERS", payload: json });
+          setLoading(false);
+        }
+      };
+      if (user) {
+        fetchChapters();
+      }
     }
   }, [dispatch, user]);
 
@@ -49,15 +94,13 @@ const Courses = () => {
       return;
     }
 
-    // const formData = new FormData();
-    const formData = {
-      title: title,
-      img: file
-    }
-    // formData.append("title", title);
-    // formData.append("img", file);
-    // console.log("image: ", file)
-    console.log("formData: ", formData)
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("duration", duration);
+    formData.append("description", description);
+    formData.append("teacher", teacher);
+    formData.append("img", file);
 
     const response = await fetch("http://localhost:4000/api/chapters/", {
       method: "POST",
@@ -94,33 +137,39 @@ const Courses = () => {
       dispatch({ type: "CREATE_CHAPTERS", payload: json });
     }
   };
-
+  const centerContentStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+console.log("chapters: ", chapters)
   return (
-    <Layout>
-      <div className="flex  flex-col justify-between md:mx-14">
-        <h1 className="md:ml-4 ml-2 md:mt-10 mt-6 md:mb-4  text-md md:text-xl font-black  flex">
+    // <Layout>
+    <>
+      <div className="ml-12">
+        <h1 className="md:mt-10 text-md md:text-xl font-black  flex">
           {" "}
-          <ClassIcon className="mx-2 my-auto" />
-          Your Courses
+          <ClassIcon />
+           Courses
         </h1>
-        <div className="flex text-white  my-6" role="group">
+        {user?.role === "Admin" && <div className="flex text-white  my-6" role="group">
           <button
             type="button"
             onClick={() => setButtonPopup(true)}
-            className="inline-flex items-center lg:px-32 px-2  lg:py-4 md:py-4 py-1 mx-1  md:mx-4  rounded-xl drop-shadow-md md:text-sm text-xs    font-medium  transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 "
+            className="inline-flex items-center lg:px-32 px-2 lg:py-4 md:py-4 py-1 rounded-xl drop-shadow-md md:text-sm text-xs font-medium transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 "
           >
             <LibraryAddIcon className="mr-2" /> Add New Course
           </button>
-          <Link
+          {/* <Link
             to="/profile"
             type="button"
             className="inline-flex items-center lg:px-32 px-2 lg:py-4 md:py-4  py-1 mx-1  md:mx-4  rounded-xl drop-shadow-md  md:text-sm text-xs   font-medium transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
           >
             <AccountBoxIcon className="mr-2" />
             Profile
-          </Link>
+          </Link> */}
 
-          <button
+          {/* <button
             type="button"
             class="inline-flex items-center lg:px-32 px-2 lg:py-4 md:py-4 py-1 mx-1   rounded-xl md:mx-4 drop-shadow-md md:text-sm text-xs  font-medium  transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
           >
@@ -138,19 +187,26 @@ const Courses = () => {
               ></path>
             </svg>
             Downloads
-          </button>
-        </div>
+          </button> */}
+        </div>} 
       </div>
-      <div className=" flex flex-wrap md:mx-11 ">
-        <h1></h1>
+      <div>
+         <Grid container spacing={{md: '-8px'}} columns={{ xs: 4, sm: 8, md: 12 }}  style={centerContentStyle}>
+                 {chapters &&
+                  chapters?.map((chapter) => (
+                    <CourseTiles key={chapter?._id} chapter={chapter} />
+                  ))}
+            </Grid>
+      </div>
+      {/* <div className="flex flex-wrap h-screen items-center justify-center">
         {chapters &&
           chapters.map((chapter) => (
             <CourseTiles key={chapter._id} chapter={chapter} />
           ))}
-      </div>
+      </div> */}
       <div>
         <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-          <div className=" flex items-center justify-center relative ">
+          <div className="flex items-center justify-center">
             {loading ? (
               <div className="flex flex-col">
                 <ProgressBar
@@ -171,15 +227,47 @@ const Courses = () => {
                 encType="multipart/form-data"
               >
                 <h2 className="mx-auto text-xl font-black  ">Add new Course</h2>
-                <label className="mt-10">Course Name</label>
+                <label className="mt-4">Course Name</label>
                 <input
                   type="text"
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
-                  className="mb-6 w-80  bg-gray-200 border rounded-xl border-slate-600"
+                  className="mb-2 w-80  bg-gray-200 border rounded-xl border-slate-600"
                   placeholder="Enter Course Name"
                 />
-                <label className="mt-4">Course Thumbnail</label>
+                <label className="mt-2">Price</label>
+                <input
+                  type="number"
+                  onChange={(e) => setPrice(e.target.value)}
+                  value={price}
+                  className="mb-2 w-80  bg-gray-200 border rounded-xl border-slate-600"
+                  placeholder="Enter Price"
+                />
+                <label className="mt-2">Course Duration</label>
+                <input
+                  type="text"
+                  onChange={(e) => setDuration(e.target.value)}
+                  value={duration}
+                  className="mb-2 w-80  bg-gray-200 border rounded-xl border-slate-600"
+                  placeholder="Enter Course Duration"
+                />
+                <label className="mt-2">Course Teacher</label>
+                <input
+                  type="text"
+                  onChange={(e) => setTeacher(e.target.value)}
+                  value={teacher}
+                  className="mb-2 w-80  bg-gray-200 border rounded-xl border-slate-600"
+                  placeholder="Enter Teacher Name"
+                />
+                <label className="mt-2">Course Description</label>
+                <input
+                  type="text"
+                  onChange={(e) => setDescription(e.target.value)}
+                  value={description}
+                  className="mb-2 w-80  bg-gray-200 border rounded-xl border-slate-600"
+                  placeholder="Enter Course Description"
+                />
+                <label className="mt-2">Course Thumbnail</label>
                 <div className="flex items-center justify-center bg-grey-lighter">
                   <label className="w-80  flex  items-center px-16 py-3 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
                     <svg
@@ -202,7 +290,7 @@ const Courses = () => {
                     />
                   </label>
                 </div>
-                <button className=" mt-10 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg py-2">
+                <button className="mt-6 bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg py-2">
                   Add Course
                 </button>
                 {error && <div>{error}</div>}
@@ -211,7 +299,8 @@ const Courses = () => {
           </div>
         </Popup>
       </div>
-    </Layout>
+      </>
+    // {/* </Layout> */}
   );
 };
 

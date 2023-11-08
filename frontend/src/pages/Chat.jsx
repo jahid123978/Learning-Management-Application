@@ -52,7 +52,6 @@ function Chat() {
   };
 
   return (
-    <Layout>
       <div
         ref={messageRef}
         className="flex flex-col  mb-[10vh]   h-full overflow-x-hidden overflow-y-scroll md:m-2 xl:mx-[5%] md:mt-10 lg:w-[90%] md:h-[80vh] md:rounded-2xl md:bg-slate-700"
@@ -96,10 +95,10 @@ function Chat() {
        
         <form
           onSubmit={sendChat}
-          className="pd-1 md:w-[80%]  w-full md:justify-center fixed bottom-0 flex "
+          className="pd-1 md:w-[100%] w-full md:justify-center flex "
         >
           <input
-            className="w-[80%] rounded-lg drop-shadow-lg "
+            className="w-[100%] rounded-lg drop-shadow-lg "
             type="text"
             name="chat"
             placeholder="sendtext"
@@ -150,7 +149,7 @@ function Chat() {
           </button>
         </form>
       </div>
-    </Layout>
+  
   );
 }
 

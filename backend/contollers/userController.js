@@ -32,15 +32,16 @@ const loginUser = async (req, res) => {
 
 const signUpUser = async (req, res) => {
   const { name, email, password } = req.body;
-
+  console.log("req body: ", req.body)
   try {
     const user = await UserModel.signup(name, email, password);
 
     //create token
     const token = createToken(user._id);
-
-    res.status(200).json({ email, password, token });
+    console.log("user", user)
+    res.status(200).json({name, email, password, token });
   } catch (error) {
+    console.log("err: ", error)
     res.status(400).json({ error: error.message });
   }
 };

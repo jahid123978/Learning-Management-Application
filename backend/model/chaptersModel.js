@@ -8,6 +8,20 @@ const chaptersSchema = new Schema(
       type: String,
       required: true,
     },
+    price:{
+      type: Number,
+      required: true,
+    },
+    duration:{
+      type: String,
+      required: true,
+    },
+    teacher:{
+      type: String,
+    },
+    description:{
+      type: String,
+    },
     img: {
       type: String,
       default: "null",
