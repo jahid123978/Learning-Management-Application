@@ -13,6 +13,7 @@ import { ProgressBar } from "react-loader-spinner";
 import Swal from "sweetalert2";
 import Layout from "../componets/Layout/Layout";
 import { Grid } from "@mui/material";
+import CheckoutForm from "./CheckoutForm/CheckoutForm";
 const OpenCourse = () => {
   const location = useLocation();
   const propsData = location.state;
@@ -37,7 +38,7 @@ const OpenCourse = () => {
   const [buttonPopup2, setButtonPopup2] = useState(false);
   const { user } = useAuthContext();
   const {dispatch}=useModuleContext()
-
+  console.log("use: ", user)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -176,8 +177,12 @@ const OpenCourse = () => {
             <h2>Course Price: {propsData?.price}</h2>
             <p><span className='font-size'>Description</span>: {propsData?.description}</p>
             <div className="md:mx-10 mx-2 mt-10">
-          {file && file.map((files) => <Collapsible unit={files} />)}
-          {fileLink && fileLink.map((files) => <Collapsible unit={files} />)}
+              <CheckoutForm
+               propsData = {propsData}
+               user = {user}
+              ></CheckoutForm>
+          {/* {file && file.map((files) => <Collapsible unit={files} />)}
+          {fileLink && fileLink.map((files) => <Collapsible unit={files} />)} */}
         </div>
             </Grid>
             </Grid>

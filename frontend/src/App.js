@@ -14,6 +14,10 @@ import Login from "./pages/Auth/login";
 import Signup from "./pages/Auth/signup";
 import Header from "./pages/Pages/Header/Header";
 import Footer from "./pages/Pages/Footer/Footer"
+import About from "./pages/Pages/About/About";
+import PurchasedCourse from "./pages/PurchasedCourse/PurchasedCourse";
+import PurchasedCourses from "./pages/PurchasedCourse/PurchasedCourses";
+import PurchasedHistory from "./pages/PurchasedHistory/PurchasedHistory";
 
 function App() {
   const { user } = useAuthContext();
@@ -80,6 +84,22 @@ function App() {
         <Route
           path="/OpenCourse"
           element={<OpenCourse />}
+        />
+        <Route
+          path="/purchasedCourse"
+          element={<PurchasedCourse />}
+        />
+        <Route
+          path="/purchasedCourses"
+          element={<PurchasedCourses />}
+        />
+        <Route
+          path="/purchasedHistory"
+          element={<PurchasedHistory />}
+        />
+        <Route
+          path="/About"
+          element={<About/>}
         />
         {/* <Route
           path="/Todo"

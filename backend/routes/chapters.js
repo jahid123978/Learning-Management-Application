@@ -33,6 +33,6 @@ router.post("/", upload.single("img"), createChapters);
 router.delete("/:id", deleteChapter);
 
 //Update a chapter
-router.patch("/:id", updateChapter);
+router.post("/:id", updateChapter);
 
 module.exports = router;

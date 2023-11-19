@@ -9,24 +9,7 @@ import { useAuthContext } from '../../../hooks/useAuthContext';
 import { useLogout } from '../../../hooks/useLogout';
 import Swal from "sweetalert2";
 const Header = () => {
-    // const [department, setDepartmet] = useState({});
-    // const {detailsId} = useParams();
-    // const history = useHistory();
-    // const {service} = useAuth();
-    // console.log(service);
-
-    // useEffect(()=>{
-    //   const neItem = service.find(data => data.id == detailsId);
-    //   setDepartmet(neItem);
-    //   console.log(neItem);
-    // }, [service])
-  
-    // const handleToGoHome = () => {
-    //     history.push('/home');
-    // }
     const navigate = useNavigate();
-    // const { user } = useAuthContext();
-    // const {user, LogOut, admin} = useAuth();
     const handleLogin = () => {
         navigate('/login');
     }
@@ -79,11 +62,12 @@ const Header = () => {
                     <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none', paddingTop:'30px'}} to="/">HOME</Link></Typography></li>
                     {/* <li><a className="pera_text" href="/courses">COURSES</a></li> */}
                     <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="/courses">COURSES</Link></Typography></li>
-                    <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="#">OUR TEACHERS</Link></Typography></li>
+                   {user?.role !== "Admin" && <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="/purchasedCourses">PURCHASED COURSES</Link></Typography></li>}
+                    {/* <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="#">OUR TEACHERS</Link></Typography></li> */}
                    {user?.role === "Admin" && <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="/Student-List">OUR LEARNERS</Link></Typography></li>}
                    {/* {user?.role === "Admin" && <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="/Meet">CREATE MEETING</Link></Typography></li>} */}
                     <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="/Chat">CONTACT</Link></Typography></li>
-                    <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="#">ABOUT US</Link></Typography></li>
+                    <li><Typography textAlign="center"><Link style={{color: 'black', textDecoration: 'none'}} to="/About">ABOUT US</Link></Typography></li>
                     <li>{user && <Button style={{color: 'black'}}>{user?.name}</Button>} </li>
                     <li> {user?.email? <Button onClick={handleClick} style={{color: 'black'}}>Logout</Button> : <Button onClick={handleLogin} style={{color: 'black'}}>LOG IN/REGISTRATION</Button>}</li>                     
                 </ul>

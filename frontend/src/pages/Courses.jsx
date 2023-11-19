@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import { ProgressBar } from "react-loader-spinner";
 import Layout from "../componets/Layout/Layout";
 import { Grid } from "@mui/material";
+import PurchasedCourse from "./PurchasedCourse/PurchasedCourse";
 
 const Courses = () => {
   const [title, setTitle] = useState("");
@@ -21,6 +22,7 @@ const Courses = () => {
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [purchasedCourse, setPurchasedCourse] = useState([]);
   const { chapters, dispatch } = useChapterContext();
   const { user } = useAuthContext();
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -83,6 +85,7 @@ const Courses = () => {
         fetchChapters();
       }
     }
+    
   }, [dispatch, user]);
 
   const handleSubmit = async (e) => {

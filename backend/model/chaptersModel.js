@@ -46,12 +46,47 @@ const chaptersSchema = new Schema(
         },
       },
     ],
+    paymentCourse: [
+      {
+        name: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+        payment:{
+          type:Boolean,
+          default: false,
+        },
+        token:{
+          id:{
+            type:String
+          },
+          email:{
+            type:String
+          },
+          card:{
+            brand:{
+              type:String
+            },
+            country:{
+              type:String
+            },
+            funding:{
+              type:String
+            }
+          }
+
+        }
+      },
+    ],
     user_id: {
       type: String,
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  
 );
 
 module.exports = mongoose.model("chapters", chaptersSchema);

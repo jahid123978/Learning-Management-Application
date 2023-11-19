@@ -1,7 +1,8 @@
 const Chapters = require("../model/chaptersModel");
 const mongoose = require("mongoose");
 const cloudinary = require("../helper/cloudinary");
-
+const ObjectId = require('mongodb').ObjectId;
+const stripe = require('stripe')('sk_test_51HUEyCDOfBXcEuEsTZCdBB0EyPYnqaNdEve90jIbZL5aMuJNfLFFHeMtqend6JfcCFOxKnRvfNh4b9y0EzZsnfNk00YehuaxbT')
 // get all chapters
 const getChapters = async (req, res) => {
   try {
@@ -72,23 +73,45 @@ const createChapters = async (req, res) => {
 const updateChapter = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "no such id" });
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ error: "no such id" });
+  // }
+  
+  // console.log("req.body: ", req.body);
+  try{
+    const existingDocument = await Chapters.findOne({_id: new ObjectId(id) });
+  console.log("existingDocument: ", existingDocument);
+    if (existingDocument) {
+      // Make sure existingDocument is an instance of YourModel
+      if (existingDocument instanceof Chapters) {
+        // Add the object to the array
+        existingDocument.paymentCourse.push(req.body);
+
+        // Save the updated document
+        await existingDocument.save();
+
+        return res.status(200).json(existingDocument);
+      }
+
+  }} catch(error){
+    res.status(400).json(error);
   }
+  
+  // const chapters = await Chapters.findByIdAndUpdate(
+  //   { _id: id },
+  //   {
+  //     ...req.body,
+  //   }
+  // );
 
-  const chapters = await Chapters.findByIdAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
-    }
-  );
+  // if (!chapters) {
+  //   return res.status(404).json({ error: "no such workout" });
+  // }
 
-  if (!chapters) {
-    return res.status(404).json({ error: "no such workout" });
-  }
+  // res.status(200).json(chapters);
 
-  res.status(200).json(chapters);
-};
+
+}
 
 //delete a chapters
 
@@ -122,5 +145,5 @@ module.exports = {
   getchapter,
   createChapters,
   deleteChapter,
-  updateChapter,
+  updateChapter
 };

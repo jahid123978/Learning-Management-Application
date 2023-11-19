@@ -1,0 +1,22 @@
+.about-image{
+    width: 100%;
+}
+.button-text{
+    position: absolute;
+    bottom: 20%;
+    margin-left: 45%;
+}
+.about-container{
+    margin-top: 20px;
+}
+.about-us{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.about-us img{
+    width: 70%;
+    height: 70%;
+}
+.container-img{
+   margin: 10px;
+}
