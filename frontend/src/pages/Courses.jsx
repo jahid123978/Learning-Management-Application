@@ -50,7 +50,7 @@ const Courses = () => {
   useEffect(() => {
     setLoading(true);
 
-    if (user.role === "Admin") {
+    if (user?.role === "Admin") {
       const fetchChapters = async () => {
         const response = await fetch("http://localhost:4000/api/chapters/", {
           headers: {
@@ -149,6 +149,7 @@ console.log("chapters: ", chapters)
   return (
     // <Layout>
     <>
+    {chapters?<div>
       <div className="ml-12">
         <h1 className="md:mt-10 text-md md:text-xl font-black  flex">
           {" "}
@@ -302,6 +303,18 @@ console.log("chapters: ", chapters)
           </div>
         </Popup>
       </div>
+      </div>: <div className="flex flex-col">
+                <ProgressBar
+                  height="100"
+                  width="200"
+                  ariaLabel="progress-bar-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="progress-bar-wrapper"
+                  borderColor="#000000"
+                  barColor="#07fc03"
+                />
+                <h1 className="text-4xl font-black mb-4">Loading..</h1>
+              </div>}
       </>
     // {/* </Layout> */}
   );

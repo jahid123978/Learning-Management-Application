@@ -140,7 +140,7 @@ const OpenCourse = () => {
       <>
       <BreadCrumbs />
 
-      <div className=" flex flex-col ">
+      {propsData? <div className=" flex flex-col ">
         <div className="flex  flex-col justify-between md:mx-6">
           <h1 className="ml-4 md:mt-10  mt-2 mb-4 text-xl font-black  flex">
             Course overview
@@ -307,7 +307,18 @@ const OpenCourse = () => {
             )}
           </div>
         </Popup>
-      </div>
+      </div>:  <div className="flex flex-col">
+                <ProgressBar
+                  height="100"
+                  width="200"
+                  ariaLabel="progress-bar-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="progress-bar-wrapper"
+                  borderColor="#000000"
+                  barColor="#07fc03"
+                />
+                <h1 className="text-4xl font-black mb-4">Loading..</h1>
+              </div>}
       </>
   );
 };

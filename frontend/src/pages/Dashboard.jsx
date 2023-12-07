@@ -21,7 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     setLoading(true);
 
-    if (user.role === "Admin") {
+    if (user?.role === "Admin") {
       const fetchChapters = async () => {
         const response = await fetch("http://localhost:4000/api/chapters/", {
           headers: {
